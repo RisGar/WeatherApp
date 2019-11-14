@@ -3,6 +3,7 @@ package com.rg.weatherapp5;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,12 +15,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.johnhiott.darkskyandroidlib.ForecastApi;
+import com.johnhiott.darkskyandroidlib.RequestBuilder;
+import com.johnhiott.darkskyandroidlib.models.Request;
+import com.johnhiott.darkskyandroidlib.models.WeatherResponse;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        ForecastApi.create("rb69c7c636f94e685ae0f6f5806e5c2bb");
+
+        RequestBuilder weather = new RequestBuilder();
+
+        Request request = new Request();
+        request.setLat("32.00");
+        request.setLng("-81.00");
+        request.setUnits(Request.Units.US);
+        request.setLanguage(Request.Language.PIG_LATIN);
+        request.addExcludeBlock(Request.Block.CURRENTLY);
+
+        weather.getWeather(request, new Callback<WeatherResponse>() {
+
+            @Override
+            public void success(WeatherResponse weatherResponse, Response response) {
+                //Do something
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                Log.d(com.rg.weatherapp5.TAG, "Error while calling: " + retrofitError.getUrl());
+            }
+        });
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,6 +75,8 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
 
     @Override
     public void onBackPressed() {
