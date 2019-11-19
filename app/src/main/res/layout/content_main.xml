@@ -6,8 +6,27 @@
     android:padding="25dp"
     android:background="@drawable/bg_gradient">
 
-    <TextView android:id="@+id/address" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textSize="24dp"
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="@android:color/white"
         android:text="Bergstedt, Hamburg"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/currentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="7°C"
+        android:textSize="100dp" />
 
 </RelativeLayout>

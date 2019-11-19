@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.johnhiott.darkskyandroidlib.ForecastApi;
 import com.johnhiott.darkskyandroidlib.RequestBuilder;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity
 
         ForecastApi.create("b69c7c636f94e685ae0f6f5806e5c2bb");
 
-        RequestBuilder weather = new RequestBuilder();
+        final RequestBuilder weather = new RequestBuilder();
 
         Request request = new Request();
         request.setLat("53.6647895");
@@ -50,7 +51,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void success(WeatherResponse weatherResponse, Response response) {
 
-                Log.d(MainActivity.TAG, "Success");
+                Log.d(MainActivity.TAG, "Success ");
+
+                Log.d(MainActivity.TAG, "Current Temperature: " + weatherResponse.getCurrently().getTemperature());
+                Log.d(MainActivity.TAG, "Current Summary: " + weatherResponse.getCurrently().getSummary());
+
+                TextView currentTemp = (TextView) findViewById(R.id.currentTemp);
+                String currentTempFormatted = String.format("%.1f", weatherResponse.getCurrently().getTemperature()) + "°C";
+                currentTemp.setText(currentTempFormatted);
 
             }
 
@@ -63,22 +71,15 @@ public class MainActivity extends AppCompatActivity
         });
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();*/
         navigationView.setNavigationItemSelectedListener(this);
     }
 

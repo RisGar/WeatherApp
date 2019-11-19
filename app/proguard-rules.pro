@@ -19,3 +19,17 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# DarkSkyApi models
+-keep class com.johnhiott.darkskyandroidlib.models.**{ *; }
+
+# Retrofit 1.X for our DarkSkyApi
+
+-keep class com.squareup.okhttp.** { *; }
+-keep class retrofit.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+-dontwarn retrofit.**
+-dontwarn rx.**
