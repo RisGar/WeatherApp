@@ -54,11 +54,17 @@ public class MainActivity extends AppCompatActivity
                 Log.d(MainActivity.TAG, "Success ");
 
                 Log.d(MainActivity.TAG, "Current Temperature: " + weatherResponse.getCurrently().getTemperature());
-                Log.d(MainActivity.TAG, "Current Summary: " + weatherResponse.getCurrently().getSummary());
+
 
                 TextView currentTemp = (TextView) findViewById(R.id.currentTemp);
                 String currentTempFormatted = String.format("%.1f", weatherResponse.getCurrently().getTemperature()) + "°C";
                 currentTemp.setText(currentTempFormatted);
+
+                Log.d(MainActivity.TAG, "Current Summary: " + weatherResponse.getCurrently().getSummary());
+
+                TextView currentSummary = (TextView) findViewById(R.id.currentSummary);
+                String currentSummaryFormatted =  weatherResponse.getCurrently().getSummary();
+                currentSummary.setText(currentSummaryFormatted);
 
             }
 
