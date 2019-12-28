@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.github.torryharris:skycons:8d69ad6d18'
     implementation 'com.github.johnhiott:DarkSkyApi:v0.1.5'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'

@@ -16,15 +16,6 @@
         android:textColor="@android:color/white"
         android:text="Bergstedt, Hamburg"/>
 
-    <ImageView
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/currentTemp"
-        app:srcCompat="@drawable/cloud" />
-
-
     <TextView
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -53,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="Tomorrow: 3.2°C"
+        android:text="Tomorrow: 6.2°C"
         android:textSize="25dp" />
 
 

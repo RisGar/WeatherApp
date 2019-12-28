@@ -1,5 +1,6 @@
 package com.rg.weatherapp5;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,12 +15,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.johnhiott.darkskyandroidlib.ForecastApi;
 import com.johnhiott.darkskyandroidlib.RequestBuilder;
 import com.johnhiott.darkskyandroidlib.models.Request;
 import com.johnhiott.darkskyandroidlib.models.WeatherResponse;
+import com.thbs.skycons.library.WindView;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -66,6 +70,14 @@ public class MainActivity extends AppCompatActivity
                 String currentSummaryFormatted =  weatherResponse.getCurrently().getSummary();
                 currentSummary.setText(currentSummaryFormatted);
 
+                ImageView imageView = (ImageView) findViewById(R.id.imageView);
+
+                if(imageView == imageView){
+
+                    //windView();
+
+                }
+
             }
 
             @Override
@@ -90,6 +102,26 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void windView(){
+
+        LinearLayout layout = new LinearLayout(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout.setLayoutParams(params);
+
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        WindView windView = new WindView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        //Using these params, you can control width & height of the icon
+        params.width = 200;
+        params.height = 200;
+        windView.setLayoutParams(params);
+
+        layout.addView(windView);
+        this.setContentView(layout);
+
+    }
 
     @Override
     public void onBackPressed() {
