@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:textColor="@android:color/white"
-        android:text="Bergstedt, Hamburg"/>
+        android:text="Your Location"/>
 
     <LinearLayout
         android:layout_above="@+id/currentTemp"
