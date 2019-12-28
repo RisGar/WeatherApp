@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="25dp"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/bg_gradient"
+    android:id="@+id/main_view">
+
 
     <TextView
         android:layout_centerHorizontal="true"
@@ -15,6 +17,14 @@
         android:textSize="24dp"
         android:textColor="@android:color/white"
         android:text="Bergstedt, Hamburg"/>
+
+    <LinearLayout
+        android:layout_above="@+id/currentTemp"
+        android:layout_below="@id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/icon"
+        android:orientation="horizontal" />
 
     <TextView
         android:layout_centerHorizontal="true"

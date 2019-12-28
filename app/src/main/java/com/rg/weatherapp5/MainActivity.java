@@ -17,13 +17,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.johnhiott.darkskyandroidlib.ForecastApi;
 import com.johnhiott.darkskyandroidlib.RequestBuilder;
 import com.johnhiott.darkskyandroidlib.models.Request;
 import com.johnhiott.darkskyandroidlib.models.WeatherResponse;
-import com.thbs.skycons.library.WindView;
+import com.thbs.skycons.library.CloudView;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity
 
                 if(imageView == imageView){
 
-                    //windView();
+                    cloudView();
 
                 }
 
@@ -102,24 +103,16 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void windView(){
+    public void cloudView(){
 
-        LinearLayout layout = new LinearLayout(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.setLayoutParams(params);
-
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
         //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
-        WindView windView = new WindView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+        CloudView cloudView = new CloudView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
-        //Using these params, you can control width & height of the icon
-        params.width = 200;
-        params.height = 200;
-        windView.setLayoutParams(params);
+        layout.addView(cloudView);
+        //setContentView(layout);
 
-        layout.addView(windView);
-        this.setContentView(layout);
 
     }
 
