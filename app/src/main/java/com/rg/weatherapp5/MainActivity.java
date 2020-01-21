@@ -35,9 +35,15 @@ import android.widget.Toast;
 
 import com.johnhiott.darkskyandroidlib.ForecastApi;
 import com.johnhiott.darkskyandroidlib.RequestBuilder;
+import com.johnhiott.darkskyandroidlib.models.DataBlock;
+import com.johnhiott.darkskyandroidlib.models.DataPoint;
 import com.johnhiott.darkskyandroidlib.models.Request;
 import com.johnhiott.darkskyandroidlib.models.WeatherResponse;
 import com.thbs.skycons.library.CloudView;
+import com.thbs.skycons.library.WindView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -78,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         request.setLng(longitude);
         request.setUnits(Request.Units.SI);
         request.setLanguage(Request.Language.ENGLISH);
-        //request.addExcludeBlock(Request.Block.CURRENTLY);
 
         weather.getWeather(request, new Callback<WeatherResponse>() {
 
@@ -90,23 +95,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d(MainActivity.TAG, "Current Temperature: " + weatherResponse.getCurrently().getTemperature());
 
                 TextView currentTemp = (TextView) findViewById(R.id.currentTemp);
+
                 String currentTempFormatted = String.format("%.1f", weatherResponse.getCurrently().getTemperature()) + "°C";
+
                 currentTemp.setText(currentTempFormatted);
+
+
+                List list = weatherResponse.getDaily().getData();
+
+                Log.d(MainActivity.TAG, "Temperature Tomorrow: " + list);
+
 
                 Log.d(MainActivity.TAG, "Current Summary: " + weatherResponse.getCurrently().getSummary());
 
                 TextView currentSummary = (TextView) findViewById(R.id.currentSummary);
                 String currentSummaryFormatted =  weatherResponse.getCurrently().getSummary();
-                currentSummary.setText(currentSummaryFormatted);
 
-                ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
-                if(imageView == imageView){
+                String cloudy = "cloudy";
+
+                if(weatherResponse.getCurrently().getIcon().equals(cloudy)){
 
                     cloudView();
 
                 }
-
             }
 
             @Override
@@ -132,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getLocation() {
-        
+
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -208,6 +220,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudView cloudView = new CloudView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudView);
+        //setContentView(layout);
+
+
+    }
+
+    public void windView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        WindView windView = new WindView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(windView);
         //setContentView(layout);
 
 
