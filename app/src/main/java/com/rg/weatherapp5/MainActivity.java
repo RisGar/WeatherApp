@@ -101,22 +101,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d(MainActivity.TAG, "Success ");
 
                 Log.d(MainActivity.TAG, "Current Temperature: " + weatherResponse.getCurrently().getTemperature());
-
                 TextView currentTemp = (TextView) findViewById(R.id.currentTemp);
-
                 String currentTempFormatted = String.format("%.1f", weatherResponse.getCurrently().getTemperature()) + "°C";
-
                 currentTemp.setText(currentTempFormatted);
 
-                List list = weatherResponse.getDaily().getData();
-
-                Log.d(MainActivity.TAG, "Temperature Tomorrow: " + list);
-
+                DataPoint dataPoint = weatherResponse.getDaily().getData().get(1);
+                double tomorrowTemperature = dataPoint.getTemperatureMin() + dataPoint.getTemperatureMax() / 2;
+                Log.d(MainActivity.TAG, "Temperature Tomorrow: " + tomorrowTemperature);
+                TextView tomorrowTemp = (TextView) findViewById(R.id.tomorrowTemp);
+                String tomorrowtTempFormatted = String.format("Tomorrow: " + "%.1f", tomorrowTemperature) + "°C";
+                tomorrowTemp.setText(tomorrowtTempFormatted);
 
                 Log.d(MainActivity.TAG, "Current Summary: " + weatherResponse.getCurrently().getSummary());
-
                 TextView currentSummary = (TextView) findViewById(R.id.currentSummary);
                 String currentSummaryFormatted =  weatherResponse.getCurrently().getSummary();
+                currentSummary.setText(currentSummaryFormatted);
 
                 Log.d(MainActivity.TAG, "Current Icon: " + weatherResponse.getCurrently().getIcon());
 
@@ -362,11 +361,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
 
             if (location1 != null) {
+
                 double latti = location1.getLatitude();
                 double longi = location1.getLongitude();
                 lattitude = String.valueOf(latti);
                 longitude = String.valueOf(longi);
-
 
             }
 
@@ -379,13 +378,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
 
-
             else  if (location2 != null) {
+
                 double latti = location2.getLatitude();
                 double longi = location2.getLongitude();
                 lattitude = String.valueOf(latti);
                 longitude = String.valueOf(longi);
-
 
             }
 
@@ -394,43 +392,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this,"Unable to Trace your location",Toast.LENGTH_SHORT).show();
 
             }
+
         }
+
     }
 
     protected void buildAlertMessageNoGps() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setMessage("Please Turn ON your GPS Connection")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
                     public void onClick(final DialogInterface dialog, final int id) {
+
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
                     }
+
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
                     public void onClick(final DialogInterface dialog, final int id) {
+
                         dialog.cancel();
+
                     }
                 });
+
         final AlertDialog alert = builder.create();
+
         alert.show();
+
     }
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
             super.onBackPressed();
+
         }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+
     }
 
     @Override
@@ -438,14 +455,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
