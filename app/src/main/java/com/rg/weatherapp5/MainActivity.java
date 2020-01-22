@@ -361,7 +361,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
 
-            if (location != null) {
+            if (location1 != null) {
+                double latti = location1.getLatitude();
+                double longi = location1.getLongitude();
+                lattitude = String.valueOf(latti);
+                longitude = String.valueOf(longi);
+
+
+            }
+
+            else if (location != null) {
 
                 double latti = location.getLatitude();
                 double longi = location.getLongitude();
@@ -370,14 +379,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
 
-            else  if (location1 != null) {
-                double latti = location1.getLatitude();
-                double longi = location1.getLongitude();
-                lattitude = String.valueOf(latti);
-                longitude = String.valueOf(longi);
-
-
-            }
 
             else  if (location2 != null) {
                 double latti = location2.getLatitude();
