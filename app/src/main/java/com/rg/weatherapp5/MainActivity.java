@@ -39,7 +39,15 @@ import com.johnhiott.darkskyandroidlib.models.DataBlock;
 import com.johnhiott.darkskyandroidlib.models.DataPoint;
 import com.johnhiott.darkskyandroidlib.models.Request;
 import com.johnhiott.darkskyandroidlib.models.WeatherResponse;
+import com.thbs.skycons.library.CloudFogView;
+import com.thbs.skycons.library.CloudMoonView;
+import com.thbs.skycons.library.CloudRainView;
+import com.thbs.skycons.library.CloudSnowView;
+import com.thbs.skycons.library.CloudSunView;
+import com.thbs.skycons.library.CloudThunderView;
 import com.thbs.skycons.library.CloudView;
+import com.thbs.skycons.library.MoonView;
+import com.thbs.skycons.library.SunView;
 import com.thbs.skycons.library.WindView;
 
 import java.util.ArrayList;
@@ -100,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 currentTemp.setText(currentTempFormatted);
 
-
                 List list = weatherResponse.getDaily().getData();
 
                 Log.d(MainActivity.TAG, "Temperature Tomorrow: " + list);
@@ -111,14 +118,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TextView currentSummary = (TextView) findViewById(R.id.currentSummary);
                 String currentSummaryFormatted =  weatherResponse.getCurrently().getSummary();
 
+                Log.d(MainActivity.TAG, "Current Icon: " + weatherResponse.getCurrently().getIcon());
 
-                String cloudy = "cloudy";
-
-                if(weatherResponse.getCurrently().getIcon().equals(cloudy)){
+                if(weatherResponse.getCurrently().getIcon().equals("cloudy")){
 
                     cloudView();
 
                 }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("partly-cloudy-day")){
+
+                    cloudSunView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("partly-cloudy-night")){
+
+                    cloudMoonView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("wind")){
+
+                    windView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("clear-day")){
+
+                    sunView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("clear-night")){
+
+                    moonView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("rain")){
+
+                    cloudRainView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("snow")){
+
+                    cloudSnowView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("sleet")){
+
+                    cloudSnowView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("fog")){
+
+                    cloudFogView();
+
+                }
+
+                else if(weatherResponse.getCurrently().getIcon().equals("thunderstorm")){
+
+                    cloudThunderView();
+
+                }
+
+                else{
+
+                    cloudView();
+
+                }
+
             }
 
             @Override
@@ -140,6 +213,136 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();*/
         navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    public void cloudThunderView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudThunderView cloudThunderView = new CloudThunderView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudThunderView);
+        //setContentView(layout);
+
+
+    }
+
+    public void cloudMoonView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudMoonView cloudMoonView = new CloudMoonView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudMoonView);
+        //setContentView(layout);
+
+
+    }
+
+    public void cloudFogView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudFogView cloudFogView = new CloudFogView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudFogView);
+        //setContentView(layout);
+
+
+    }
+
+    public void cloudSnowView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudSnowView cloudSnowView = new CloudSnowView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudSnowView);
+        //setContentView(layout);
+
+
+    }
+
+    public void cloudRainView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudRainView cloudRainView = new CloudRainView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudRainView);
+        //setContentView(layout);
+
+
+    }
+
+    public void moonView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        MoonView moonView = new MoonView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(moonView);
+        //setContentView(layout);
+
+
+    }
+
+    public void sunView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        SunView sunView = new SunView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(sunView);
+        //setContentView(layout);
+
+
+    }
+
+    public void cloudSunView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudSunView cloudSunView = new CloudSunView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudSunView);
+        //setContentView(layout);
+
+
+    }
+
+    public void cloudView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        CloudView cloudView = new CloudView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(cloudView);
+        //setContentView(layout);
+
+
+    }
+
+    public void windView(){
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
+        //Using these params, you can control view attributes
+        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
+        WindView windView = new WindView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
+
+        layout.addView(windView);
+        //setContentView(layout);
+
 
     }
 
@@ -210,32 +413,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    public void cloudView(){
-
-        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
-        //Using these params, you can control view attributes
-        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
-        CloudView cloudView = new CloudView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
-
-        layout.addView(cloudView);
-        //setContentView(layout);
-
-
-    }
-
-    public void windView(){
-
-        LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
-        //Using these params, you can control view attributes
-        //attributes include boolean isStatic,boolean isAnimated, int strokeColor , int backgroundColor
-        WindView windView = new WindView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
-
-        layout.addView(windView);
-        //setContentView(layout);
-
-
     }
 
     @Override
