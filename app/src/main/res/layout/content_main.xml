@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:textColor="@android:color/white"
-        android:text="Your Location"/>
+        android:text="Your Location"
+        android:textAlignment="center"/>
 
     <LinearLayout
         android:layout_above="@+id/currentTemp"
@@ -33,8 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="7.2°C"
-        android:textSize="100dp" />
+        android:text="Loading"
+        android:textSize="100dp"
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_below="@+id/currentTemp"
@@ -43,9 +45,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:text="Cloudy"
+        android:text="Please"
         android:textColor="@android:color/white"
-        android:textSize="50dp" />
+        android:textSize="50dp"
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_below="@+id/currentSummary"
@@ -54,8 +57,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="Tomorrow: 6.2°C"
-        android:textSize="25dp" />
+        android:text="Wait"
+        android:textSize="25dp"
+        android:textAlignment="center"/>
 
 
 </RelativeLayout>

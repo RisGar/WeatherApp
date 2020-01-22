@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -50,8 +52,12 @@ import com.thbs.skycons.library.MoonView;
 import com.thbs.skycons.library.SunView;
 import com.thbs.skycons.library.WindView;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int REQUEST_LOCATION = 1;
     private LocationManager locationManager;
     String lattitude,longitude;
+    double latti;
+    double longi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final RequestBuilder weather = new RequestBuilder();
 
-
         Request request = new Request();
         //request.setLat("53.6647895");
         //request.setLng("10.1214057");
@@ -102,20 +109,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 Log.d(MainActivity.TAG, "Current Temperature: " + weatherResponse.getCurrently().getTemperature());
                 TextView currentTemp = (TextView) findViewById(R.id.currentTemp);
-                String currentTempFormatted = String.format("%.1f", weatherResponse.getCurrently().getTemperature()) + "°C";
+                String currentTempFormatted = String.format(Locale.ENGLISH, "%.1f", weatherResponse.getCurrently().getTemperature()) + "°C";
                 currentTemp.setText(currentTempFormatted);
 
                 DataPoint dataPoint = weatherResponse.getDaily().getData().get(1);
                 double tomorrowTemperature = dataPoint.getTemperatureMin() + dataPoint.getTemperatureMax() / 2;
                 Log.d(MainActivity.TAG, "Temperature Tomorrow: " + tomorrowTemperature);
                 TextView tomorrowTemp = (TextView) findViewById(R.id.tomorrowTemp);
-                String tomorrowtTempFormatted = String.format("Tomorrow: " + "%.1f", tomorrowTemperature) + "°C";
+                String tomorrowtTempFormatted = String.format(Locale.ENGLISH, "Tomorrow: " + "%.1f", tomorrowTemperature) + "°C";
                 tomorrowTemp.setText(tomorrowtTempFormatted);
 
                 Log.d(MainActivity.TAG, "Current Summary: " + weatherResponse.getCurrently().getSummary());
                 TextView currentSummary = (TextView) findViewById(R.id.currentSummary);
                 String currentSummaryFormatted =  weatherResponse.getCurrently().getSummary();
                 currentSummary.setText(currentSummaryFormatted);
+
+                getLocationName();
 
                 Log.d(MainActivity.TAG, "Current Icon: " + weatherResponse.getCurrently().getIcon());
 
@@ -362,8 +371,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (location1 != null) {
 
-                double latti = location1.getLatitude();
-                double longi = location1.getLongitude();
+                latti = location1.getLatitude();
+                longi = location1.getLongitude();
                 lattitude = String.valueOf(latti);
                 longitude = String.valueOf(longi);
 
@@ -371,8 +380,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             else if (location != null) {
 
-                double latti = location.getLatitude();
-                double longi = location.getLongitude();
+                latti = location.getLatitude();
+                longi = location.getLongitude();
                 lattitude = String.valueOf(latti);
                 longitude = String.valueOf(longi);
 
@@ -380,8 +389,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             else  if (location2 != null) {
 
-                double latti = location2.getLatitude();
-                double longi = location2.getLongitude();
+                latti = location2.getLatitude();
+                longi = location2.getLongitude();
                 lattitude = String.valueOf(latti);
                 longitude = String.valueOf(longi);
 
@@ -392,6 +401,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this,"Unable to Trace your location",Toast.LENGTH_SHORT).show();
 
             }
+
+        }
+
+    }
+
+    private void getLocationName() {
+
+        TextView location = (TextView) findViewById(R.id.location);
+
+        try {
+
+            Geocoder geo = new Geocoder(this.getApplicationContext(), Locale.ENGLISH);
+            List<Address> addresses = geo.getFromLocation(latti, longi, 1);
+            if (addresses.isEmpty()) {
+                location.setText("Waiting for Location");
+            }
+            else {
+                if (addresses.size() > 0) {
+                    location.setText(addresses.get(0).getLocality() + ", " + addresses.get(0).getCountryName());
+                }
+            }
+        } catch (IOException e) {
+
+            e.printStackTrace();
 
         }
 
