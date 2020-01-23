@@ -78,6 +78,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
 
+        loadWeather();
+
+    }
+
+    @Override
+    protected void onRestart() {
+
+        super.onRestart();
+
+        loadWeather();
+
+    }
+
+    public void loadWeather() {
+
         ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -222,9 +237,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();*/
         navigationView.setNavigationItemSelectedListener(this);
 
+
     }
 
-    public void cloudThunderView(){
+    public void cloudThunderView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -232,12 +248,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudThunderView cloudThunderView = new CloudThunderView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudThunderView);
-        //setContentView(layout);
 
 
     }
 
-    public void cloudMoonView(){
+    public void cloudMoonView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -245,12 +260,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudMoonView cloudMoonView = new CloudMoonView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudMoonView);
-        //setContentView(layout);
 
 
     }
 
-    public void cloudFogView(){
+    public void cloudFogView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -258,12 +272,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudFogView cloudFogView = new CloudFogView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudFogView);
-        //setContentView(layout);
 
 
     }
 
-    public void cloudSnowView(){
+    public void cloudSnowView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -271,12 +284,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudSnowView cloudSnowView = new CloudSnowView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudSnowView);
-        //setContentView(layout);
-
 
     }
 
-    public void cloudRainView(){
+    public void cloudRainView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -284,12 +295,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudRainView cloudRainView = new CloudRainView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudRainView);
-        //setContentView(layout);
 
 
     }
 
-    public void moonView(){
+    public void moonView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -297,12 +307,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MoonView moonView = new MoonView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(moonView);
-        //setContentView(layout);
-
 
     }
 
-    public void sunView(){
+    public void sunView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -310,12 +318,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SunView sunView = new SunView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(sunView);
-        //setContentView(layout);
 
 
     }
 
-    public void cloudSunView(){
+    public void cloudSunView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -323,12 +330,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudSunView cloudSunView = new CloudSunView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudSunView);
-        //setContentView(layout);
-
 
     }
 
-    public void cloudView(){
+    public void cloudView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -336,12 +341,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         CloudView cloudView = new CloudView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(cloudView);
-        //setContentView(layout);
-
 
     }
 
-    public void windView(){
+    public void windView() {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.icon);
         //Using these params, you can control view attributes
@@ -349,8 +352,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         WindView windView = new WindView(this,true,false, Color.parseColor("#FFFFFF"),Color.parseColor("#00FFFFFF"));
 
         layout.addView(windView);
-        //setContentView(layout);
-
 
     }
 
@@ -464,9 +465,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+
+        else {
 
             super.onBackPressed();
 
@@ -493,6 +497,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
 
         }
