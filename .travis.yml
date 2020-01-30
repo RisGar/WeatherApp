@@ -6,7 +6,7 @@ dist: trusty
 env:
  global:
    - ANDROID_API=28
-   - EMULATOR_API=26
+   - EMULATOR_API=24
    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
    - ADB_INSTALL_TIMEOUT=5
 
@@ -16,21 +16,21 @@ android:
     - platform-tools
     - build-tools-28.0.3
     - android-28
-    - android-26
+    - android-24
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-24
     - sys-img-armeabi-v7a-google_apis-28
-    - sys-img-armeabi-v7a-google_apis-26
+    - sys-img-armeabi-v7a-google_apis-24
   licenses:
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
 before_script:
-  - echo no | android create avd --force -n test -t android-26 --abi google_apis/armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
+  - echo no | android create avd --force -n test -t android-24 --abi google_apis/armeabi-v7a
+  - emulator -engine classic -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
