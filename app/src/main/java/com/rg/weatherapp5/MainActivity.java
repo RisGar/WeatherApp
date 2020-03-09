@@ -515,15 +515,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            // NavigationGallery
         } else if (id == R.id.nav_slideshow) {
-
+            // NavigationSlideshow
         } else if (id == R.id.nav_tools) {
-
+            // NavigationTools
         } else if (id == R.id.nav_share) {
-
+            // NavigationShare
         } else if (id == R.id.nav_send) {
-
+            // NavigationSend
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
